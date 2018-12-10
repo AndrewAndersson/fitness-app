@@ -25,6 +25,11 @@
           #pwInput="ngModel">
         <mat-error>Missing your password.</mat-error>  
       </mat-form-field>
-      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
+      <button type="submit"
+              mat-raised-button
+              color="primary"
+              [disabled]="f.invalid"
+              *ngIf="!isLogin">Submit</button>
+      <mat-spinner *ngIf="isLogin"></mat-spinner>
     </form>
   </section>

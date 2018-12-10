@@ -3,6 +3,7 @@ import { Exersice } from './exersice.model';
 import { Subject, Subscription } from 'rxjs';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
+import { UiService } from '../shared/ui.service';
 
 
 
@@ -19,7 +20,8 @@ export class TrainingService {
   private runningExercise: Exersice;
 
   constructor(
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private uiService: UiService
   ) { }
 
   fetchAvaliableExersices() {
@@ -37,6 +39,7 @@ export class TrainingService {
             });
           })
         ).subscribe((exercises: Exersice[]) => {
+          this.uiService.loadingStateChanged.next(true);
           this.avaliableExersices = exercises;
           this.exercisesChange.next([...this.avaliableExersices]);
         }));

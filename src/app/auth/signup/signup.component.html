@@ -44,6 +44,11 @@
       name="agree"
       required
       labelPosition="before">Agree to Terms and Conditions</mat-checkbox>
-    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
+    <button type="submit"
+            mat-raised-button
+            color="primary"
+            [disabled]="f.invalid"
+            *ngIf="!isSignup">Submit</button>
+    <mat-spinner *ngIf="isSignup"></mat-spinner>
   </form>
 </section>
