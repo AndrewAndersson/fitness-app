@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
@@ -13,6 +14,7 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { environment } from 'src/environments/environment';
 import { AuthModule } from './auth/auth.module';
+import { appReducer } from './app.reducer';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,6 @@ import { AuthModule } from './auth/auth.module';
     WellcomeComponent,
     HeaderComponent,
     SidenavListComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -31,6 +32,7 @@ import { AuthModule } from './auth/auth.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AuthModule,
+    StoreModule.forRoot({ui: appReducer})
   ],
   providers: [],
   bootstrap: [AppComponent],

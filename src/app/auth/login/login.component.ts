@@ -1,28 +1,33 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './../auth.service';
 import { UiService } from 'src/app/shared/ui.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../app.reducer';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
-  isLogin = false;
+export class LoginComponent implements OnInit {
+  isLoading$: Observable<boolean>;
   private isLoginSubscription: Subscription;
 
   constructor(
     private authService: AuthService,
-    private uiService: UiService
+    private uiService: UiService,
+    private store: Store<{ui: fromApp.State}>
   ) { }
 
   ngOnInit() {
-    this.isLoginSubscription = this.uiService.loadingStateChanged
-        .subscribe(stateChanged => {
-          this.isLogin = stateChanged;
-        });
+    this.isLoading$ = this.store.pipe(map(state => state.ui.isLoading));
+    // this.isLoginSubscription = this.uiService.loadingStateChanged
+    //     .subscribe(stateChanged => {
+    //       this.isLogin = stateChanged;
+    //     });
   }
   onSubmit(form: NgForm) {
     this.authService.login({
@@ -31,10 +36,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    if (this.isLoginSubscription) {
-      this.isLoginSubscription.unsubscribe();
-    }
-  }
+  // ngOnDestroy() {
+  //   if (this.isLoginSubscription) {
+  //     this.isLoginSubscription.unsubscribe();
+  //   }
+  // }
 
 }
