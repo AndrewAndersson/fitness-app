@@ -11,10 +11,8 @@ import { WellcomeComponent } from './wellcome/wellcome.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
-import { StopTrainingComponent } from './training/current-training/stop-training.component';
 import { environment } from 'src/environments/environment';
 import { AuthModule } from './auth/auth.module';
-import { TrainingModule } from './training/training.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +20,7 @@ import { TrainingModule } from './training/training.module';
     WellcomeComponent,
     HeaderComponent,
     SidenavListComponent,
-    StopTrainingComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -33,10 +31,8 @@ import { TrainingModule } from './training/training.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AuthModule,
-    TrainingModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [StopTrainingComponent]
 })
 export class AppModule { }
