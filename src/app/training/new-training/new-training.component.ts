@@ -3,7 +3,6 @@ import { TrainingService } from '../training.service';
 import { Exersice } from './../exersice.model';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { UiService } from 'src/app/shared/ui.service';
 import { Store } from '@ngrx/store';
 import * as fromTraining from '../training.reducer';
 import * as fromRoot from '../../app.reducer';
@@ -19,7 +18,6 @@ export class NewTrainingComponent implements OnInit {
   isLoading$: Observable<boolean>;
   constructor(
               private trainingService: TrainingService,
-              private uiService: UiService,
               private store: Store<fromTraining.State>
               ) { }
 
